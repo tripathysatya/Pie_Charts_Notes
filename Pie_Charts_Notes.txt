@@ -1,0 +1,213 @@
+Pie Chart:
+----------
+Pie chart is a circular chart divided into segments. These segments are called wedges.
+
+Each wedge represents an individual category. The area of the wedge is proprotional to value of that category.
+
+Pie chart is very helpful for comparison of categories.
+The number of categories are less mostly <=5.
+
+20 overs, overwise scores--->bar chart but not pie chart
+The chance of winning match-->pie chart
+
+By using pie() function of pyplot-->pie chart
+
+pie(x, explode=None, labels=None, colors=None, autopct=None, pctdistance=0.6, shadow=False, labeldistance=1.1, startangle=0, radius=1, counterclock=True, wedgeprops=None, textprops=None, center=(0, 0), frame=False, rotatelabels=False, *, normalize=None, data=None)
+    Plot a pie chart.
+
+    Make a pie chart of array *x*.  The fractional area of each wedge is
+    given by ``x/sum(x)``.  If ``sum(x) < 1``, then the values of *x* give
+    the fractional area directly and the array will not be normalized. The
+    resulting pie will have an empty wedge of size ``1 - sum(x)``.
+
+    The wedges are plotted counterclockwise, by default starting from the
+    x-axis.
+
+eg-1:
+
+import matplotlib.pyplot as plt
+import numpy as np
+marks = np.array([25,30,43,12])
+plt.pie(marks)
+plt.show()
+
+1. Adding Labels:
+-----------------
+We can add labels to the wedges. For this we have to use labels argument.
+It should be any sequence of strings.
+
+import matplotlib.pyplot as plt
+import numpy as np
+marks = np.array([25,30,43,12])
+mylabels = ['Python','Java','Devops','DataScience']
+plt.pie(marks,labels=mylabels)
+plt.show()
+
+
+2. autopct:
+-----------
+autopct --->auto percentage
+To label wedges with their numeric percentage(%)
+We can specify its value by using formatted string.
+
+eg-1:
+After decimal point, if we want to consider only one digit
+autopct = '%.1f'
+plt.pie(marks,labels=mylabels,autopct = '%.1f')
+
+
+eg-2:
+After decimal point, if we want to consider two digits
+autopct = '%.2f'
+plt.pie(marks,labels=mylabels,autopct = '%.2f')
+
+eg-3: To add % symbol also
+autopct = '%.2f%'
+ValueError: incomplete format
+
+autopct = '%.2f%%'
+
+import matplotlib.pyplot as plt
+import numpy as np
+marks = np.array([25,30,43,12])
+mylabels = ['Python','Java','Devops','DataScience']
+plt.pie(marks,labels=mylabels,autopct = '%.2f%%')
+plt.show()
+
+3. Explode:
+-----------
+If we want to explode/highlight a particular category then we should use explode argument.
+
+import matplotlib.pyplot as plt
+import numpy as np
+marks = np.array([25,30,43,12])
+mylabels = ['Python','Java','Devops','DataScience']
+myexplode = [0.0,0.2,0.0,0.5]
+plt.pie(marks,labels=mylabels,autopct = '%.2f%%',explode=myexplode)
+plt.show()
+
+
+4. Shadow:
+----------
+We can add shadow effect to the pie chart by using shadow parameter.
+The default value is False. By setting to True, we can shadow effect.
+
+import matplotlib.pyplot as plt
+import numpy as np
+marks = np.array([25,30,43,12])
+mylabels = ['Python','Java','Devops','DataScience']
+myexplode = [0.0,0.0,0.0,0.2]
+plt.pie(marks,labels=mylabels,autopct = '%.2f%%',explode=myexplode,shadow=True)
+plt.show()
+
+
+labels
+autopct
+explode
+shadow
+
+5. colors:
+-----------
+We can specify our own colors for the wedges. It can be list or array.
+We can specify color name or short color code or even hexa code also.
+
+r-->red
+g-->green
+b--->blue
+c-->cyan
+m-->magenta
+k--->black
+w--->white
+
+
+import matplotlib.pyplot as plt
+import numpy as np
+marks = np.array([25,30,43,12])
+mylabels = ['Python','Java','Devops','DataScience']
+myexplode = [0.0,0.0,0.0,0.2]
+mycolors = ['g','b','r','yellow']
+plt.pie(marks,labels=mylabels,autopct = '%.2f%%',explode=myexplode,shadow=True,colors=mycolors)
+plt.show()
+
+
+eg-2:
+  import matplotlib.pyplot as plt
+import numpy as np
+marks = np.array([1,1,1,1,1,1,1])
+my_labels = ['Violet','Indigo','blue','green','yellow','orange','red'] 
+my_colors = ['violet','indigo','blue','green','yellow','orange','red'] 
+#my_colors = ['#8B00FF','#2E2B5F','#0000FF','#00FF00','#FFFF00','#FF7F00','#FF0000'] 
+#my_explode= [0.0,0.0,0.0,0.3]
+plt.pie(marks,labels=my_labels,autopct = '%.2f%%',shadow=True,colors = my_colors,counterclock=False)
+plt.show()  
+
+Note: If the number of colors is less than the number of wedges, then the colors will be reused.
+
+6. startangle:
+-------------- 
+startangle represents from where first wedge has to start. Bydefault it starts from zero from x-axis and move in counter clockwise direction.
+
+
+import matplotlib.pyplot as plt
+import numpy as np
+marks = np.array([25,30,43,12])
+mylabels = ['Python','Java','Devops','DataScience']
+myexplode = [0.0,0.0,0.0,0.2]
+mycolors = ['g','b','r','yellow']
+plt.pie(marks,labels=mylabels,autopct = '%.2f%%',explode=myexplode,shadow=True,colors=mycolors,startangle=90)
+plt.show()
+
+7. counterclock:
+---------------
+Bydefault the wedges will be considered in counter clockwise direction. If we want clock wise direction we have to use counterclock argument. The defualt value is True. 
+
+import matplotlib.pyplot as plt
+import numpy as np
+marks = np.array([25,30,43,12])
+mylabels = ['Python','Java','Devops','DataScience']
+myexplode = [0.0,0.0,0.0,0.2]
+mycolors = ['g','b','r','yellow']
+plt.pie(marks,labels=mylabels,autopct = '%.2f%%',explode=myexplode,shadow=True,colors=mycolors,counterclock=False)
+plt.show()
+
+
+8. Adding legend:
+------------------
+plt.legend()
+
+Even we can add title for the legend.
+plt.legend(title='The 4 Subject Marks')
+
+import matplotlib.pyplot as plt
+import numpy as np
+marks = np.array([25,30,43,12])
+mylabels = ['Python','Java','Devops','DataScience']
+myexplode = [0.0,0.0,0.0,0.2]
+mycolors = ['g','b','r','yellow']
+plt.pie(marks,labels=mylabels,autopct = '%.2f%%',explode=myexplode,shadow=True,colors=mycolors,counterclock=False)
+plt.legend(title='The 4 Subjects Marks')
+plt.tight_layout()
+plt.show()
+
+wedgeprops:
+----------
+The wedges of pie chart can be customized using the wedgeprops parameter.
+It is a dictionary of key-value pairs. The keys can be edgecolor,linestyle,linewidth etc
+
+import matplotlib.pyplot as plt
+import numpy as np
+marks = np.array([25,30,43,12])
+mylabels = ['Python','Java','Devops','DataScience']
+myexplode = [0.0,0.0,0.0,0.2]
+mycolors = ['g','b','r','yellow']
+plt.pie(marks,
+       labels=mylabels,
+	   autopct = '%.2f%%',
+	   explode=myexplode,
+	   shadow=True,
+	   colors=mycolors,
+	   counterclock=False,
+	   wedgeprops={'edgecolor':'k','linestyle':'-','linewidth':3})
+plt.legend(title='The 4 Subjects Marks')
+plt.tight_layout()
+plt.show()
